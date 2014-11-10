@@ -1,0 +1,6 @@
+---
+- shell: curl -sL https://deb.nodesource.com/setup | sudo bash -
+- apt: pkg={{item}}
+  with_items:
+  - nodejs
+  # - npm
