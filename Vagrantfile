@@ -10,11 +10,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "hashicorp/precise64"
+  config.vm.box_url = "hashicorp/x64"
+
+  config.vm.network "forwarded_port", guest: 8000, host: 8080
 
   config.vm.provision "ansible" do |ansible|
     ansible.sudo = true
-    ansible.verbose = "vv"
+    ansible.verbose = "v"
     ansible.playbook = "provisioning/starterkit.yaml"
     # ansible.host_key_checking = false
   end

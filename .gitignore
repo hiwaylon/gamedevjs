@@ -1,3 +1,6 @@
 .vagrant/
 npm-debug.log
 changelist.txt
+phaser
+phaser-examples
+

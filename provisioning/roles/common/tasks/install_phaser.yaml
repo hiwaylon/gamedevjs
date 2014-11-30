@@ -1,0 +1,3 @@
+---
+- git: repo=https://github.com/photonstorm/phaser.git dest=/vagrant/phaser
+- git: repo=https://github.com/photonstorm/phaser-examples.git dest=/vagrant/phaser-examples
