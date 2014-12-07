@@ -1,3 +1,7 @@
 .vagrant/
 npm-debug.log
 changelist.txt
+node_modules
+phaser
+phaser-examples
+.DS_Store
