@@ -1,0 +1,5 @@
+#!/bin/sh
+kill $KARMA_PID
+cd /vagrant/site
+karma start &
+KARMA_PID=$!

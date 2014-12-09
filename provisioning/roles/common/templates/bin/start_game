@@ -1,0 +1,5 @@
+#!/bin/sh
+cd /vagrant/site
+python -m SimpleHTTPServer 8888 &
+GAME_PID=$!
+echo "Game running as " $GAME_PID

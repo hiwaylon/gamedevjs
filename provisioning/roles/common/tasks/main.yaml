@@ -1,5 +1,10 @@
 ---
-- include: install_apt_packages.yaml
-- include: install_node_js.yaml
-- include: install_npm_packages.yaml
-- include: install_phaser.yaml
+# - include: install_apt_packages.yaml
+# - include: install_node_js.yaml
+# - include: install_npm_packages.yaml
+# - include: install_phaser.yaml
+- include: install_misc.yaml
+
+- name: Run stuff
+  shell: /home/vagrant/bin/stop_game; /home/vagrant/bin/start_game
+  shell: /home/vagrant/bin/reset_karma

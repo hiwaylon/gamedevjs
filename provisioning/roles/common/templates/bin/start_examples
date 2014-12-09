@@ -1,0 +1,4 @@
+#!/bin/sh
+cd /vagrant/phaser-examples
+python -m SimpleHTTPServer &
+EXAMPLES_PID=$!

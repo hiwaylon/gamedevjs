@@ -1,0 +1,19 @@
+---
+- shell: mkdir -p /vagrant/site/assets
+- shell: mkdir -p /vagrant/site/js
+- shell: mkdir -p /vagrant/site/js/app
+- shell: mkdir -p /vagrant/site/js/lib
+
+- name: Install RequireJS
+  shell: "curl -O http://requirejs.org/docs/release/2.1.15/minified/require.js && mv require.js /vagrant/site/js"
+
+- name: Install perlin noise
+  shell: "curl -O https://raw.githubusercontent.com/josephg/noisejs/master/perlin.js && mv perlin.js /vagrant/site/js/lib"
+
+- name: Make bin dir.
+  shell: mkdir -p bin
+
+- template: src=bin/start_game dest=bin/start_game mode=777
+- template: src=bin/stop_game dest=bin/stop_game mode=777
+- template: src=bin/start_game dest=bin/start_game mode=777
+- template: src=bin/reset_karma dest=bin/reset_karma mode=777
