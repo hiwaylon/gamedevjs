@@ -1,13 +1,12 @@
-# Epic Ultra JS Developer environment
-
-## phaser-dev branch
+# JavaScript/HTML5 game development environment using PhaserJS.
 Goodies for Javascript game development using Phaser framework.
 
-### TODO - Phaser
-- auto server phaser-examples directory
-- cannonical site directory layout? Where to put index.html and js/sandbox.js?
+## Important Branches
+- **master**: releasable, although nothing is really released from this project *(yet)*.
+- **phaser-dev**: Ongoing, bleeding edge, general development. *(May not work.)*
 
-## TODO - Master
-###  Project management
-- install taglia for epic self contained uber mega dev environment
-
+## TODO
+- **Serving:** auto server phaser-examples directory *(sorta done)*
+- ~~cannonical site directory layout? Where to put index.html and js/sandbox.js?~~
+- **Project management:** install taglia for self contained dev environment
+- **Provisioning:** requirejs, perlin, phaser, etc : should provisioner fetch or should the be templated to lock version (staleness!), or should the provisioner fetch a version/tag?

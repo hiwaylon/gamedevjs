@@ -1,3 +1,4 @@
 ---
-- git: repo=https://github.com/photonstorm/phaser.git dest=/vagrant/site/lib/phaser
-- git: repo=https://github.com/photonstorm/phaser-examples.git dest=/vagrant/site/lib/phaser-examples
+# TODO cURL phaser.min.js into site/js/lib
+# - git: repo=https://github.com/photonstorm/phaser.git dest=/vagrant/site/lib/phaser
+# - git: repo=https://github.com/photonstorm/phaser-examples.git dest=/vagrant/site/lib/phaser-examples

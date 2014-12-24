@@ -1,4 +1,4 @@
-define(['phaser'], function(Phaser) {
+define(['lib/phaser'], function(Phaser) {
   // 'use strict';
 
   function Sandbox() {
@@ -19,7 +19,9 @@ define(['phaser'], function(Phaser) {
 
   };
 
-  return Sandbox;
+  return {
+    Sandbox: Sandbox
+  };
 });
 
 
