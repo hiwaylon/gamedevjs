@@ -8,13 +8,30 @@ requirejs.config({
   // never includes a ".js" extension since
   // the paths config could be for a directory.
   paths: {
-  app: '../app'
-}
+    app: '../app'
+  },
+
+  shim: {
+    'phaser': {
+      exports: 'Phaser'
+    }
+  }
 });
 
 // Start the main app logic.
-requirejs(['app/sandbox'],
-  function(sandbox) {
+// TODO: Don't need phaser here, testing.
+requirejs(['phaser', 'app/sandbox'], function(Phaser, Sandbox) {
   // jQuery, canvas and the app/sub module are all
   // loaded and can be used here now.
+
+  // new Phaser.Game(800, 600, Phaser.AUTO, '', {
+  //   preload: this.preload,
+  //   create: this.create
+  // });
+
+  // The shim for Phaser is here, which wraps it and makes it RequireJS-y; it is a
+  // good time to make it available to the system.
+  var sandbox = new Sandbox(Phaser);
+  sandbox.flib();
+  sandbox.slib();
 });
