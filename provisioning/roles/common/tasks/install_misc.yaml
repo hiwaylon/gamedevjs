@@ -1,14 +1,14 @@
 ---
 - shell: mkdir -p /vagrant/site/assets
-- shell: mkdir -p /vagrant/site/js
-- shell: mkdir -p /vagrant/site/js/app
-- shell: mkdir -p /vagrant/site/js/lib
+- shell: mkdir -p /vagrant/site/
+- shell: mkdir -p /vagrant/site/app
+- shell: mkdir -p /vagrant/site/lib
 
 - name: Install RequireJS
-  shell: "curl -O http://requirejs.org/docs/release/2.1.15/minified/require.js && mv require.js /vagrant/site/js"
+  shell: "curl -O http://requirejs.org/docs/release/2.1.15/minified/require.js && mv require.js /vagrant/site/lib"
 
 - name: Install perlin noise
-  shell: "curl -O https://raw.githubusercontent.com/josephg/noisejs/master/perlin.js && mv perlin.js /vagrant/site/js/lib"
+  shell: "curl -O https://raw.githubusercontent.com/josephg/noisejs/master/perlin.js && mv perlin.js /vagrant/site/lib"
 
 - name: Make bin dir.
   shell: mkdir -p bin

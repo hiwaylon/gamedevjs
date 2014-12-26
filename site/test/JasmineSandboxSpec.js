@@ -3,9 +3,8 @@ define(['app/sandbox'], function(sandbox) {
     console.log('hi JasmineSandboxSpec');
 
     s = new sandbox.Sandbox();
-    // console.log(s);
-    s.flib();
-    s.slib();
+    // This isn't real it is to see similar behavior to app.js.
+    s.start();
 
     console.log('end JasmineSandboxSpec');
   });
