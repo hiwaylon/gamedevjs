@@ -1,35 +1,33 @@
-// 'use strict';
+'use strict';
 
 requirejs.config({
 
+  // Use project root as base instead of location of require.js.
   baseUrl: '',
 
-  paths: {
-    phaser: 'lib/phaser'
-  },
+  // paths: {
+  //   phaser: 'lib/phaser'
+  // },
 
-  shim: {
-    'phaser': {
-      exports: 'Phaser'
-    }
-  }
+  // shim: {
+  //   'phaser': {
+  //     exports: 'Phaser'
+  //   },
+  //  }
 });
 
-// Start the main app logic.
-// TODO: Don't need phaser here, testing.
-requirejs(['app/sandbox', 'phaser'],
-function(sandbox, Phaser) {
+// 'lib/perlin' loads 'noise' into the global namespace (use until such time a a wrapper is written for use
+// with require JS).
+// The perlin module is installed into the global namespace as 'noise'; phaser as 'Phaser'.
+requirejs(['app/sandbox', 'lib/perlin', 'lib/phaser'], function(sandbox) {
+    console.log();
 
-  console.log(sandbox);
+  console.log(blah);
 
-  // console.log(Phaser);
-  // new Phaser.Game(800, 600, Phaser.AUTO, '', {
-  //   preload: this.preload,
-  //   create: this.create
-  // });
+  console.log(nooo);
+  console.log(Phaser);
+  console.log(noise);
 
-  // The shim for Phaser is here, which wraps it and makes it RequireJS-y; it is a
-  // good time to make it available to the system.
   var sandbox = new sandbox.Sandbox();
-  sandbox.start();
+  sandbox.start(Phaser, noise);
 });

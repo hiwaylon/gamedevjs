@@ -3,5 +3,7 @@ npm-debug.log
 changelist.txt
 phaser
 phaser-examples
-node_modules
+*#
+*~
 .DS_Store
+node_modules

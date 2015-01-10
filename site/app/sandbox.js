@@ -1,23 +1,44 @@
-define(['phaser'], function(Phaser) {
+define(function() {
   'use strict';
 
+  console.log('hi sandbox');
+
+  // This is stupid and it sucks.
+  var characters = {
+    "characterSpecs": [
+      {
+        "system": "phaserSpriteSheet",
+        "name": "darthVader",
+        "assetLocation": "assets/sprites/darthvader.png",
+        "tileSize": 32,
+        "tileSize2": 48,
+        "tileSize3": 16
+      }
+    ]
+  };
+
+  var Phaser;
+  var PerlinNoise;
+  var kWindowWidth = 768;
+  var kWindowHeight = 480;
+
+  // I can't figure out how to get varibles set in ctor onto this in the other methods.
   function Sandbox() {
-    console.log('hi sandbox');
-    console.log(Phaser);
   }
 
   Sandbox.prototype = {
     constructor: Sandbox,
 
-    start: function() {
-      console.log(Phaser);
-      console.assert(Phaser, 'Phaser lib unavailable');
+    start: function(phaser, perlinNoise) {
+      Phaser = phaser;
 
-      this.game = new Phaser.Game(768, 480, Phaser.CANVAS, '', {
+      PerlinNoise = perlinNoise;
+
+      this.game = new Phaser.Game(kWindowWidth, kWindowHeight, Phaser.CANVAS, '', {
         preload: this.preload,
         create: this.create,
-        // update: update,
-        // render: render
+        update: this.update,
+        render: this.render
       });
     },
 
@@ -29,123 +50,85 @@ define(['phaser'], function(Phaser) {
     },
 
     create: function() {
-      console.log(this.game);
-      console.log(this.game.physics);
-      console.log(this.game.physics.startSystem);
-
       this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
-      darthVader = this.game.add.sprite(0, 0, 'darthVader', 0);
-      darthVader.x = Math.max(0, (Math.random() * 640) - darthVader.width);
-      darthVader.y = Math.max(0, (Math.random() * 480) - darthVader.height);
-      darthVader.scale.setTo(4, 4);
+      this.darthVader = this.game.add.sprite(0, 0, 'darthVader', 0);
+      this.darthVader.x = Math.max(0, (Math.random() * 640) - this.darthVader.width);
+      this.darthVader.y = Math.max(0, (Math.random() * 480) - this.darthVader.height);
+      this.darthVader.scale.setTo(4, 4);
 
-      ariel = this.game.add.sprite(0, 0, 'ariel', 0);
-      ariel.x = Math.max(0, (Math.random() * 640) - ariel.width);
-      ariel.y = Math.max(0, (Math.random() * 480) - ariel.height);
-      ariel.scale.setTo(3, 3);
+      this.ariel = this.game.add.sprite(0, 0, 'ariel', 0);
+      this.ariel.x = Math.max(0, (Math.random() * 640) - this.ariel.width);
+      this.ariel.y = Math.max(0, (Math.random() * 480) - this.ariel.height);
+      this.ariel.scale.setTo(3, 3);
 
-      han = this.game.add.sprite(0, 0, 'han', 0);
-      han.x = Math.max(0, (Math.random() * 640) - han.width);
-      han.y = Math.max(0, (Math.random() * 480) - han.height);
-      han.scale.setTo(3, 3);
+      this.han = this.game.add.sprite(0, 0, 'han', 0);
+      this.han.x = Math.max(0, (Math.random() * 640) - this.han.width);
+      this.han.y = Math.max(0, (Math.random() * 480) - this.han.height);
+      this.han.scale.setTo(3, 3);
 
-      this.game.physics.enable([ariel, darthVader, han], Phaser.Physics.ARCADE);
-      ariel.body.allowRotation = false;
-      darthVader.body.allowRotation = false;
-      han.body.allowRotation = false;
+      this.game.physics.enable([this.ariel, this.darthVader, this.han], Phaser.Physics.ARCADE);
+      this.ariel.body.allowRotation = false;
+      this.darthVader.body.allowRotation = false;
+      this.han.body.allowRotation = false;
 
       var text = "darth vader vs. ariel\nBATTLE!\nsave me SOLO!!!";
       var style = { font: "65px Arial", fill: "#ff0044", align: "center" };
 
-      var t = this.game.add.text(this.game.world.centerX-300, 0, text, style);
+      var t = this.game.add.text(this.game.world.centerX - 300, 0, text, style);
+
+      this.rect = new Phaser.Rectangle(100, 100, 100, 100);
+      this.point = new Phaser.Point(50, 400);
+
+      // Terrain haxxin'
+      // generate some points from perlin
+      // behavior is?
+      // - intersection with player
+      // use case?
+      // - collecting flowers and balloons and sliding and swinging
+      var terrainPointCount = kWindowWidth;
+      this.terrainPoints = [];
+      for (var i = 0; i < terrainPointCount; i++) {
+        // What are the parameters to perlin2 for??? Where on the d
+        // distribution or something?
+        // console.debug(this);
+
+        // I still don't know how to use perlin.
+        var noiseFeeder = (37 * i) / 11;
+        console.log("noiseFeeder: " + noiseFeeder);
+        var perlinY = PerlinNoise.perlin2(noiseFeeder, 0);
+        console.log("perlinY: " + perlinY);
+        // perlinY *= perlinY * 10;
+        // console.log("perlinY^2: " + perlinY);
+        var height = (kWindowHeight*.66) - (perlinY * 100);
+        console.log("height:" + height);
+        // Each point is 10 spaces apart -v;
+        var point = new Phaser.Point(i * 20, height);
+        console.log("point:" + point);
+
+        this.terrainPoints.push(point);
+      }
     },
 
-    update: function() {},
-    render: function() {},
+    update: function() {
+      this.game.physics.arcade.moveToPointer(this.ariel, 60, this.game.input.activePointer);
+      this.game.physics.arcade.moveToObject(this.darthVader, this.ariel, 12);
+      this.game.physics.arcade.moveToObject(this.han, this.darthVader, 60);
+    },
 
-    // run: function() {
-    //   console.log('run sandbox');
+    render: function() {
+      // this.game.debug.text("hello world!", 320, 240);
+      this.game.debug.inputInfo(32, 32);
+      this.game.debug.spriteInfo(this.darthVader, 640 - 256, 32);
+      this.game.debug.spriteInfo(this.ariel, 640 - 256, 480 - 128);
 
-    //   // TODO: All the high level Phaser things should be abstracted out such that the game is started via a facade
-    //   // and adapter that wraps the phaser stuff.
+      this.game.debug.geom(this.rect, 'rgba(255,0,0,1)');
+      this.game.debug.geom(this.point, 'rgba(255,0,0,1)');
 
-    //   var game = new Phaser.Game(768, 480, Phaser.CANVAS, '', {
-    //     preload: preload,
-    //     create: create,
-    //     update: update,
-    //     render: render
-    //   });
-
-    //   // var game = new Phaser.Game(
-    //   //   768, 480, Phaser.CANVAS, 'sandbox', {
-    //   //     preload: preload,
-    //   //     create: create,
-    //   //     update: update,
-    //   //     render: render
-    //   //   }
-    //   // );
-
-    //   function preload() {
-    //     // TODO: This looks a lot like a job for data driving stuff!
-    //     game.load.spritesheet('darthVader', 'assets/sprites/darthvader.png', 32, 48, 16);
-    //     game.load.spritesheet('ariel', 'assets/sprites/ariel.png', 32, 48, 16);
-    //     game.load.spritesheet('han', 'assets/sprites/hansolo.png', 32, 48, 16);
-    //   }
-
-    //   var darthVader;
-    //   var ariel;
-    //   var han;
-
-    //   function create() {
-    //     game.physics.startSystem(Phaser.Physics.ARCADE);
-
-    //     darthVader = game.add.sprite(0, 0, 'darthVader', 0);
-    //     darthVader.x = Math.max(0, (Math.random() * 640) - darthVader.width);
-    //     darthVader.y = Math.max(0, (Math.random() * 480) - darthVader.height);
-    //     darthVader.scale.setTo(4, 4);
-
-    //     ariel = game.add.sprite(0, 0, 'ariel', 0);
-    //     ariel.x = Math.max(0, (Math.random() * 640) - ariel.width);
-    //     ariel.y = Math.max(0, (Math.random() * 480) - ariel.height);
-    //     ariel.scale.setTo(3, 3);
-
-    //     han = game.add.sprite(0, 0, 'han', 0);
-    //     han.x = Math.max(0, (Math.random() * 640) - han.width);
-    //     han.y = Math.max(0, (Math.random() * 480) - han.height);
-    //     han.scale.setTo(3, 3);
-
-    //     game.physics.enable([ariel, darthVader, han], Phaser.Physics.ARCADE);
-    //     ariel.body.allowRotation = false;
-    //     darthVader.body.allowRotation = false;
-    //     han.body.allowRotation = false;
-
-    //     var text = "darth vader vs. ariel\nBATTLE!\nsave me SOLO!!!";
-    //     var style = { font: "65px Arial", fill: "#ff0044", align: "center" };
-
-    //     var t = game.add.text(game.world.centerX-300, 0, text, style);
-    //   }
-
-    //   function update() {
-    //     game.physics.arcade.moveToPointer(ariel, 60, game.input.activePointer);
-    //     game.physics.arcade.moveToObject(darthVader, ariel, 12);
-    //     game.physics.arcade.moveToObject(han, darthVader, 60);
-    //   }
-
-    //   var rect = new Phaser.Rectangle( 100, 100, 100, 100 ) ;
-    //   var point = new Phaser.Point(50, 400);
-
-    //   function render() {
-    //     game.debug.text("hello world!", 320, 240);
-    //     game.debug.inputInfo(32, 32);
-    //     game.debug.spriteInfo(darthVader, 640 - 256, 32);
-    //     game.debug.spriteInfo(ariel, 640 - 256, 480 - 128);
-
-    //     game.debug.geom(rect, 'rgba(255,0,0,1)');
-
-    //     game.debug.geom(point, 'rgba(255,0,0,1)');
-    //   }
-    // }
+      for (var i = 0; i < this.terrainPoints.length; i++) {
+        this.game.debug.geom(this.terrainPoints[i], 'rgba(255,255,255)');
+      }
+    },
   };
 
   return {
