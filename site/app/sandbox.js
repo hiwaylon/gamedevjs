@@ -80,6 +80,13 @@ define(function() {
       this.rect = new Phaser.Rectangle(100, 100, 100, 100);
       this.point = new Phaser.Point(50, 400);
 
+      //
+      // Refactor time:
+      //   - Move to TDD
+      //   - Modules and "classes" for terrain
+      //   - Collision
+      //   - Debug rendering
+      //
       // Terrain haxxin'
       // generate some points from perlin
       // behavior is?
