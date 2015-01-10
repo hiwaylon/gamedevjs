@@ -6,5 +6,3 @@
   with_items:
   - build-essential
   - curl
-  - git
-  - fish
