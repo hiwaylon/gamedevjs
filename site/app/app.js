@@ -21,13 +21,6 @@ requirejs.config({
 // The perlin module is installed into the global namespace as 'noise'; phaser as 'Phaser'.
 requirejs(['app/sandbox', 'lib/perlin', 'lib/phaser'], function(sandbox) {
     console.log();
-
-  console.log(blah);
-
-  console.log(nooo);
-  console.log(Phaser);
-  console.log(noise);
-
   var sandbox = new sandbox.Sandbox();
   sandbox.start(Phaser, noise);
 });
