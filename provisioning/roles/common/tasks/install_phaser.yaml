@@ -1,2 +1,0 @@
----
-- shell: "cd /tmp && curl -O https://github.com/photonstorm/phaser/releases/download/v2.2.2/phaser.js && mv phaser.js /vagrant/site/lib"
