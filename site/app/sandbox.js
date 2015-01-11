@@ -31,7 +31,6 @@ define(function() {
 
     start: function(phaser, perlinNoise) {
       Phaser = phaser;
-
       PerlinNoise = perlinNoise;
 
       this.game = new Phaser.Game(kWindowWidth, kWindowHeight, Phaser.CANVAS, '', {
