@@ -12,3 +12,5 @@ vagrant ssh
 cd /vagrant/site
 python -m SimpleHTTPServer
 ```
+
+Now hit `localhost:8000` in a browser and observe.
