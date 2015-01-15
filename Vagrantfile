@@ -6,11 +6,11 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "precise64"
+  config.vm.box = "hashicorp/precise64"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "hashicorp/x64"
+  config.vm.box_url = "hashicorp/precise64"
 
   config.vm.network "forwarded_port", guest: 8000, host: 8000
   config.vm.network "forwarded_port", guest: 8888, host: 8888
