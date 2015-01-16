@@ -19,7 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "ansible" do |ansible|
     ansible.sudo = true
     ansible.verbose = "v"
-    ansible.playbook = "provisioning/starterkit.yaml"
+    ansible.playbook = "provisioning/gamedevjs.yaml"
     # ansible.host_key_checking = false
   end
 end
