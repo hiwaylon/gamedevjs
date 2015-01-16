@@ -1,0 +1,4 @@
+#!/bin/sh
+echo 'Stopping game server ' `cat site/gameserver.pid`
+kill `cat site/gameserver.pid`
+rm site/gameserver.pid
