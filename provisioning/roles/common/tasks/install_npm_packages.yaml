@@ -6,14 +6,20 @@
   - bower
   - grunt-cli
 
-- name: Install development npm packages.
+- name: Install development npm packages locally.
   shell: cd /vagrant && npm install karma --save-dev
 
-- name: Install development npm packages.
+- name: Install development npm packages locally.
   shell: cd /vagrant && npm install karma-jasmine --save-dev
 
-- name: Install development npm packages.
+- name: Install development npm packages locally.
   shell: cd /vagrant && npm install karma-chrome-launcher --save-dev
+
+- name: Install development npm packages locally.
+  shell: cd /vagrant && npm install karma-requirejs --save-dev
+
+- name: Install development npm packages locally.
+  shell: cd /vagrant && npm install karma-phantomjs-launcher --save-dev
 
 - name: Install karma-cli packages.
   npm: name=karma-cli global=yes

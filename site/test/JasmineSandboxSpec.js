@@ -5,7 +5,11 @@ define(['app/sandbox'], function(sandbox) {
 
     s = new sandbox.Sandbox();
     // This isn't real it is to see similar behavior to app.js.
-    s.start();
+    var stubGame = function() {};
+    s.start({
+      Game: stubGame
+    }, 
+    {});
 
     console.log('bye JasmineSandboxSpec');
   });
