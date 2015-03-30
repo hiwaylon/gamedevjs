@@ -5,7 +5,7 @@ A browser based game development environment using PhaserJS, RequireJS, Karma, J
 - **master**: tagged releases
 - **develop**: the ongoing, bleeding edge, general development branch. *(May not work!)*
 
-To try it out:
+Try it out:
 
 ```bash
 vagrant ssh
